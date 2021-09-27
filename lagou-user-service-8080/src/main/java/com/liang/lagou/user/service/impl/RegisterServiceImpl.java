@@ -1,8 +1,6 @@
 package com.liang.lagou.user.service.impl;
 
-import com.liang.lagou.pojo.LagouAuthCode;
 import com.liang.lagou.pojo.LagouUser;
-import com.liang.lagou.user.mapper.LagouAuthCodeMapper;
 import com.liang.lagou.user.mapper.LagouUserMapper;
 import com.liang.lagou.user.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,6 @@ import tk.mybatis.mapper.entity.Example;
 @Service
 public class RegisterServiceImpl implements IRegisterService {
 
-    @Autowired
-    private LagouAuthCodeMapper lagouAuthCodeMapper;
 
     @Autowired
     private LagouUserMapper lagouUserMapper;

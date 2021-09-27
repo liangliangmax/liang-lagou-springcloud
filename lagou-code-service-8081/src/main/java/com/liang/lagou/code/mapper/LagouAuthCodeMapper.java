@@ -1,4 +1,4 @@
-package com.liang.lagou.user.mapper;
+package com.liang.lagou.code.mapper;
 
 import com.liang.lagou.pojo.BaseMapper;
 import com.liang.lagou.pojo.LagouAuthCode;
