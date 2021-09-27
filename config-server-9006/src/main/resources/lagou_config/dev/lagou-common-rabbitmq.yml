@@ -1,0 +1,14 @@
+spring:
+    rabbitmq:
+        addresses: 172.16.62.216:5672
+        username: root
+        password: root
+        virtual-host: /
+        publisher-confirms: true
+        publisher-returns: true
+        template:
+            mandatory: true
+        listener:
+            concurrency: 5
+            max-concurrency: 100
+            acknowledge-mode: auto

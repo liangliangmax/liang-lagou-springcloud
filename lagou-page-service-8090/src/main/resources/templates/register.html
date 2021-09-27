@@ -15,6 +15,7 @@
             crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+    <script src="../static/api.js"></script>
     <script>
         $(function () {
             // Handler for .ready() called.
@@ -23,15 +24,17 @@
                 var password = $("#reg-password").val();
                 var code = $("#reg-code").val();
                 $.ajax({
-                    url: "http://www.test.com/api/user/register/"+email+"/"+password+"/"+code,
+                    url: apiUrl+"/api/user/register/"+email+"/"+password+"/"+code,
                     // url: "http://localhost:9002/api/user/register/"+email+"/"+password+"/"+code,
                     type: "GET",
                     success: function (data) {
-                        if(data == 0){
+                        if(data == 1){
                             alert("注册成功");
                             location.href = "login.html";
                         }else if(data == 2){
                             alert("注册码已过期，请重新获取");
+                        }else if(data == 3){
+                            alert("已经注册过了，请转至登录页面");
                         }else{
                             alert("注册失败，重新提交尝试");
                         }
@@ -47,8 +50,7 @@
             $("#getCodeBtn").on("click", function () {
                 var email = $("#reg-email").val();
                 $.ajax({
-                    url: "http://www.test.com/api/code/create/"+email,
-                    // url: "http://localhost:9002/api/code/create/"+email,
+                    url: apiUrl+"/api/code/create/"+email,
                     type: "GET",
                     success: function (data) {
                         if(data){

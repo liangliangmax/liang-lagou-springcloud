@@ -1,0 +1,41 @@
+spring:
+    datasource:
+        enable: true
+        # 使用druid数据源
+        filters: stat
+        maxActive: 2000
+        initialSize: 10
+        maxWait: 60000
+        minIdle: 10
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: true
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 50
+
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://172.16.62.216:3306/lagou-cloud?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&createDatabaseIfNotExist=true&useSSL=false&allowMultiQueries=true
+        username: root
+        password: root
+
+
+
+
+mybatis:
+    mapper-locations: classpath*:mapper/**/*.xml
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+#tk 配置选项
+mapper:
+    not-empty: false
+    identity: MYSQL
+

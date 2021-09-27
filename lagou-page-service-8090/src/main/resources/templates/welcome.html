@@ -14,12 +14,14 @@
     <!-- Bootstrap CSS -->
     <!--    <link rel="stylesheet" href="/css/bootstrap.css">-->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+    <script src="../static/api.js"></script>
+
     <script>
         $(function() {
             var token = $.cookie("token");
             $.ajax({
                 //url: "http://localhost:9002/api/user/login/"+email+"/"+password,
-                url: "http://www.test.com/api/user/info/"+token,
+                url: apiUrl+"/api/user/info/"+token,
                 type: "GET",
                 success:function (data) {
                     $("#emailspan").html(data);

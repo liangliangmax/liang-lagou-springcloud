@@ -31,7 +31,7 @@ spring:
                 initial-interval: 1000  # 初始重试间隔时间，默认1000ms
                 multiplier: 1.1   # 间隔乘数，默认1.1
 
-            name: ${spring.application.name},msms-common-database,msms-common-rabbitmq,msms-common-feign
+            name: ${spring.application.name},lagou-common-database,lagou-common-rabbitmq,lagou-common-feign
 
 
         loadbalancer:
