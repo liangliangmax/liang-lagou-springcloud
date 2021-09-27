@@ -1,0 +1,70 @@
+eureka:
+    instance:
+        health-check-url-path: /actuator/health
+        # docker 部署开启
+        prefer-ip-address: true
+        ip-address: ${host_ip:localhost}
+
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://${eureka_host:localhost}:${eureka_port:8761}/eureka/
+
+spring:
+    application:
+        name: config-server
+    profiles:
+        active: native    #git|native
+    cloud:
+        config:
+            server:
+                git:
+                    uri: ${git_url:https://code.aliyun.com/neupals/neupals-config-4.git}
+                    username: ${git_username}
+                    password: ${git_password}
+                    default-label: ${git_label:master}
+                    skip-ssl-validation: true
+                    search-paths: ${git_path:prod}
+                native:
+                    search-locations: classpath:/lagou_config/{profile}
+
+
+    rabbitmq:
+        addresses: ${rabbitmq_host:172.16.62.216}:${rabbitmq_port:5672}
+        username: ${rabbitmq_username:root}
+        password: ${rabbitmq_password:root}
+        virtual-host: /
+        publisher-confirms: true
+        publisher-returns: true
+        template:
+            mandatory: true
+        listener:
+            concurrency: 5
+            max-concurrency: 100
+            acknowledge-mode: auto
+
+    #使用security为config服务加密，用户名是user，neuabc
+    #如果不添加下面的配置，则在config项目启动过程中会随机生成一个密码
+    security:
+        user:
+            name: ${security_name:user}
+            password: ${security_password:neuabc}
+
+server:
+    port: 9006 #启动端口
+    tomcat:
+        max-connections: 10000
+        max-threads: 1000
+        uri-encoding: UTF-8
+
+#2.0暴露端点的方式
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+    endpoint:
+        health:
+            show-details: ALWAYS
+

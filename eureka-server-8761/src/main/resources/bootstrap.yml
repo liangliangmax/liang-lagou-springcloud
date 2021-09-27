@@ -1,0 +1,27 @@
+spring:
+    application:
+        name: eureka-server
+    profiles:
+        active: dev
+
+
+
+server:
+    port: 8761 #启动端口
+    tomcat:
+        max-connections: 10000
+        max-threads: 1000
+        uri-encoding: UTF-8
+
+eureka:
+    client:
+        registerWithEureka: false  #false:不作为一个客户端注册到注册中心
+        fetchRegistry: false
+        service-url:
+            defaultZone: http://127.0.0.1:8762/eureka/
+
+    instance:
+        prefer-ip-address: true
+        ip-address: ${host_ip:localhost}
+
+
