@@ -17,6 +17,10 @@
 		<module>lagou-email-service-8082</module>
 		<module>lagou-page-service-8090</module>
 		<module>config-server-9006</module>
+		<module>lagou-user-api</module>
+		<module>lagou-pojo</module>
+		<module>lagou-email-api</module>
+		<module>lagou-code-api</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -26,11 +30,25 @@
 		<version>2.5.5</version>
 	</parent>
 
+	<properties>
+
+		<org.projectlombok.version>1.18.4</org.projectlombok.version>
+
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${org.projectlombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 
@@ -43,6 +61,12 @@
 				<version>2020.0.4</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>1.0.2</version>
 			</dependency>
 
 			<dependency>
@@ -66,6 +90,24 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+
+						<!-- other annotation processors -->
+						<path>
+							<artifactId>lombok</artifactId>
+							<groupId>org.projectlombok</groupId>
+							<version>${org.projectlombok.version}</version>
+						</path>
+					</annotationProcessorPaths> <!-- depending on your project -->
+					<source>${java.version}</source> <!-- depending on your project -->
+					<target>${java.version}</target>
+				</configuration>
+				<groupId>org.apache.maven.plugins</groupId> <!-- or newer version -->
+				<version>3.8.1</version>
 			</plugin>
 		</plugins>
 
