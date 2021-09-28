@@ -41,6 +41,10 @@ public class UserInfoController implements UserInfoApi {
 
         LagouUser lagouUser = userInfoService.getUserByEmail(email);
 
+        if(lagouUser == null){
+            return RestApiResult.ERROR(ResultCode.NO_SUCH_RESULT);
+        }
+
         return RestApiResult.OK(lagouUser);
     }
 }

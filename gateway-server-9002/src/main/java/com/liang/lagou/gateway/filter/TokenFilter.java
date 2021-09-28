@@ -33,9 +33,9 @@ public class TokenFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
-        HttpCookie cookie = exchange.getRequest().getCookies().getFirst("token");
+        String token = exchange.getRequest().getHeaders().getFirst("token");
 
-        if(cookie == null || StringUtils.isEmpty(cookie.getValue())){
+        if(StringUtils.isEmpty(token)){
             log.info( "token is empty..." );
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();

@@ -13,6 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
+
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
     <script src="../static/api.js"></script>
@@ -28,16 +31,21 @@
                     // url: "http://localhost:9002/api/user/register/"+email+"/"+password+"/"+code,
                     type: "GET",
                     success: function (data) {
-                        if(data.data == 1){
-                            alert("注册成功");
-                            location.href = "login";
-                        }else if(data.data == 2){
-                            alert("注册码已过期，请重新获取");
-                        }else if(data.data == 3){
-                            alert("已经注册过了，请转至登录页面");
-                        }else{
-                            alert("注册失败，重新提交尝试");
+                        if(data.code == 200){
+                            if(data.data == 1){
+                                alert("注册成功");
+                                location.href = "login";
+                            }else if(data.data == 2){
+                                alert("注册码已过期，请重新获取");
+                            }else if(data.data == 3){
+                                alert("已经注册过了，请转至登录页面");
+                            }else{
+                                alert("注册失败，重新提交尝试");
+                            }
+                        }else {
+                            alert(data.message)
                         }
+
                     },
                     error:function (data) {
                         if(data.status == 403){

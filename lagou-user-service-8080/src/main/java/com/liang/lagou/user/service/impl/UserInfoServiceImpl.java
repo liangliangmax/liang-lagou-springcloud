@@ -43,6 +43,10 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
         LagouUser lagouUser = lagouUserMapper.selectOneByExample(example);
 
+        if(lagouUser == null){
+            return null;
+        }
+
         lagouUser.setPassword(null);
 
         return lagouUser;
