@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface UserInfoApi {
 
     @GetMapping("/user/info/{token}")
-    RestApiResult getEmailByToken(@PathVariable String token);
+    RestApiResult<String> getEmailByToken(@PathVariable String token);
 
     @GetMapping("/user/info/byEmail/{email}")
     RestApiResult<LagouUser> getUserByEmail(@PathVariable String email);
