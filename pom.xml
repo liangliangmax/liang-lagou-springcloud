@@ -16,7 +16,6 @@
 		<module>lagou-code-service-8081</module>
 		<module>lagou-email-service-8082</module>
 		<module>lagou-page-service-8090</module>
-		<module>config-server-9006</module>
 		<module>lagou-user-api</module>
 		<module>lagou-pojo</module>
 		<module>lagou-email-api</module>
@@ -118,15 +117,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>

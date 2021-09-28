@@ -31,9 +31,10 @@
                     url: apiUrl+"/api/user/login/"+email+"/"+password,
                     type: "GET",
                     success:function (data) {
-                        if(data == "false"){
-                            alert("登陆失败")
+                        if(!data.data ){
+                            alert(data.message)
                         }else{
+                            $.cookie('token', data.data,{ expires: 1 });
                             location.href = "welcome";
                         }
                     }

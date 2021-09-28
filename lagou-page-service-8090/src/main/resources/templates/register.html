@@ -28,12 +28,12 @@
                     // url: "http://localhost:9002/api/user/register/"+email+"/"+password+"/"+code,
                     type: "GET",
                     success: function (data) {
-                        if(data == 1){
+                        if(data.data == 1){
                             alert("注册成功");
                             location.href = "login.html";
-                        }else if(data == 2){
+                        }else if(data.data == 2){
                             alert("注册码已过期，请重新获取");
-                        }else if(data == 3){
+                        }else if(data.data == 3){
                             alert("已经注册过了，请转至登录页面");
                         }else{
                             alert("注册失败，重新提交尝试");

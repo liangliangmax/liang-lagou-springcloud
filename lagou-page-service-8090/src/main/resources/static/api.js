@@ -1,1 +1,1 @@
-var apiUrl = "localhost:9002";
+var apiUrl = "http://localhost:9002";

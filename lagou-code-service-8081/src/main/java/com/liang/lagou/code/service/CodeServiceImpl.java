@@ -35,6 +35,10 @@ public class CodeServiceImpl implements ICodeService {
 
         }while (code.startsWith("0"));
 
+        lagouAuthCode.setCode(code);
+
+        System.out.println("生成的验证码是:"+code);
+
         lagouAuthCode.setCreatetime(now);
 
         //谁知超时时间
@@ -43,7 +47,15 @@ public class CodeServiceImpl implements ICodeService {
 
         lagouAuthCode.setExpiretime(afterDate);
 
-        return lagouAuthCodeMapper.insertSelective(lagouAuthCode);
+        int count = lagouAuthCodeMapper.insertSelective(lagouAuthCode);
+
+        if(count == 1){
+            //发送邮件
+            //TODO
+
+        }
+
+        return count;
     }
 
     @Override

@@ -8,12 +8,11 @@ import java.io.Serializable;
 
 
 @Data
-
 @Table(name = "lagou_token")
 public class LagouToken implements Serializable {
 
     @Id
-    private int id;
+    private Integer id;
 
     private String email;
 

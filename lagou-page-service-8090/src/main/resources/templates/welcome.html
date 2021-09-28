@@ -24,7 +24,7 @@
                 url: apiUrl+"/api/user/info/"+token,
                 type: "GET",
                 success:function (data) {
-                    $("#emailspan").html(data);
+                    $("#emailspan").html(data.data);
                     $("#tokenspan").html(token);
                 },
                 error:function (data) {
