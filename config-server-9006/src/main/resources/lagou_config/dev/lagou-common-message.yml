@@ -1,0 +1,16 @@
+smtp-mail:
+    lagou:
+        default-encoding: utf-8
+        host: smtpdm.aliyun.com
+        port: 465
+        test-connection: true
+        protocol: smtp
+        username: support@neuabc.com  #发件邮箱
+        password: 112233aabbccAABBCC
+        fromAlias: NeuABC  #邮件发送人昵称
+        properties:
+            mail.smtp.ssl.enable: true
+            mail.smtp.auth: true
+            # 其实这个类可以不指定，如果不指定的话java会调用默认的实现，也就是下面这个类
+            mail.smtp.ssl.socketFactory.class: javax.net.ssl.SSLSocketFactory
+            mail.debug: true
