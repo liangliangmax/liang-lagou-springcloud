@@ -30,7 +30,7 @@
                     success: function (data) {
                         if(data.data == 1){
                             alert("注册成功");
-                            location.href = "login.html";
+                            location.href = "login";
                         }else if(data.data == 2){
                             alert("注册码已过期，请重新获取");
                         }else if(data.data == 3){
@@ -53,10 +53,13 @@
                     url: apiUrl+"/api/code/create/"+email,
                     type: "GET",
                     success: function (data) {
-                        if(data){
-                            alert("请到邮箱查看验证码！");
-                        }else{
+                        if(data.data == -1){
                             alert("这个邮箱已经注册过了");
+
+                        }else if(data.data == 0){
+                            alert("发生错误，请稍后重试");
+                        }else{
+                            alert("请到邮箱查看验证码！");
                         }
                     }
                     //dataType: "text"

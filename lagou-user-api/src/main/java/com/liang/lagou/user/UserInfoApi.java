@@ -1,6 +1,7 @@
 package com.liang.lagou.user;
 
 
+import com.liang.lagou.pojo.LagouUser;
 import com.liang.lagou.pojo.RestApiResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,4 +13,6 @@ public interface UserInfoApi {
     @GetMapping("/user/info/{token}")
     RestApiResult getEmailByToken(@PathVariable String token);
 
+    @GetMapping("/user/info/byEmail/{email}")
+    RestApiResult<LagouUser> getUserByEmail(@PathVariable String email);
 }

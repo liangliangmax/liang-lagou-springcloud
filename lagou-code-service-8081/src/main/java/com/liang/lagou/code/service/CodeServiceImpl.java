@@ -2,6 +2,9 @@ package com.liang.lagou.code.service;
 
 import com.liang.lagou.code.mapper.LagouAuthCodeMapper;
 import com.liang.lagou.pojo.LagouAuthCode;
+import com.liang.lagou.pojo.LagouUser;
+import com.liang.lagou.pojo.RestApiResult;
+import com.liang.lagou.user.UserInfoApi;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,21 @@ public class CodeServiceImpl implements ICodeService {
     @Autowired
     private LagouAuthCodeMapper lagouAuthCodeMapper;
 
+    @Autowired
+    private UserInfoApi userInfoApi;
+
 
     @Override
     public int generateCode(String email) {
+
+        RestApiResult<LagouUser> restApiResult = userInfoApi.getUserByEmail(email);
+
+        //说明已经有了
+        if(restApiResult.getCode() == 200 && restApiResult.getData()!=null){
+
+            return -1;
+        }
+
 
         Date now = new Date();
 
