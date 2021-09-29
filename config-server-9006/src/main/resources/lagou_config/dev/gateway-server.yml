@@ -21,3 +21,9 @@ spring:
 
 api:
     ignore: /**/register/**,/**/login/**,/**/code/create/**
+
+
+
+ip:
+    times: 3
+    seconds: 5

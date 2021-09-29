@@ -6,16 +6,21 @@ import com.liang.lagou.user.UserInfoApi;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
 import java.util.concurrent.*;
 
 
@@ -25,7 +30,6 @@ public class RegisterValidateCodeFilter implements GlobalFilter, Ordered {
 
     @Autowired
     private CodeApi codeApi;
-
 
     ExecutorService executorService = Executors.newFixedThreadPool(1);
 
@@ -41,7 +45,6 @@ public class RegisterValidateCodeFilter implements GlobalFilter, Ordered {
         if(antPathMatcher.match("/**/register/**",path)){
 
             System.out.println("获取到注册接口");
-
 
             String leftPath = path.substring(path.indexOf("register/"));
 
@@ -78,7 +81,6 @@ public class RegisterValidateCodeFilter implements GlobalFilter, Ordered {
                 e.printStackTrace();
             }
 
-
         }
 
 
@@ -89,4 +91,6 @@ public class RegisterValidateCodeFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return -5;
     }
+
+
 }
