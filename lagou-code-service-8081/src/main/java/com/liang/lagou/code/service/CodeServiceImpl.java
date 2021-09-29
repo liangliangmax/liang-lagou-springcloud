@@ -1,5 +1,6 @@
 package com.liang.lagou.code.service;
 
+import com.alibaba.fastjson.JSON;
 import com.liang.lagou.code.mapper.LagouAuthCodeMapper;
 import com.liang.lagou.pojo.LagouAuthCode;
 import com.liang.lagou.pojo.LagouUser;
@@ -7,11 +8,14 @@ import com.liang.lagou.pojo.RestApiResult;
 import com.liang.lagou.user.UserInfoApi;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.platform.commons.util.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CodeServiceImpl implements ICodeService {
@@ -21,6 +25,9 @@ public class CodeServiceImpl implements ICodeService {
 
     @Autowired
     private UserInfoApi userInfoApi;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
 
     @Override
@@ -65,8 +72,14 @@ public class CodeServiceImpl implements ICodeService {
         int count = lagouAuthCodeMapper.insertSelective(lagouAuthCode);
 
         if(count == 1){
+
+            Map<String, String> emailInfo = new HashMap<>();
+            emailInfo.put("to", email);
+            emailInfo.put("subject", "拉钩注册");
+            emailInfo.put("content", "验证码为："+code+" ，十分钟之内有效");
+
             //发送邮件
-            //TODO
+            rabbitTemplate.convertAndSend("mailTopicExchange", "lagou.mail", JSON.toJSONString(emailInfo));
 
         }
 

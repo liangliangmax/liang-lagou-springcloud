@@ -1,13 +1,13 @@
 smtp-mail:
     lagou:
         default-encoding: utf-8
-        host: smtpdm.aliyun.com
+        host: smtp.126.com
         port: 465
         test-connection: true
         protocol: smtp
-        username: support@neuabc.com  #发件邮箱
-        password: 112233aabbccAABBCC
-        fromAlias: NeuABC  #邮件发送人昵称
+        username: max_translia@126.com  #发件邮箱
+        password: NXPDMMDENOZPECBI
+        fromAlias: max  #邮件发送人昵称
         properties:
             mail.smtp.ssl.enable: true
             mail.smtp.auth: true
