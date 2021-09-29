@@ -44,13 +44,6 @@ spring:
             max-concurrency: 100
             acknowledge-mode: auto
 
-    #使用security为config服务加密，用户名是user，neuabc
-    #如果不添加下面的配置，则在config项目启动过程中会随机生成一个密码
-    security:
-        user:
-            name: ${security_name:user}
-            password: ${security_password:neuabc}
-
 server:
     port: 9006 #启动端口
     tomcat:
