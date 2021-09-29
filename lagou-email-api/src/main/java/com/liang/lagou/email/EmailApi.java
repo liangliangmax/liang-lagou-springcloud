@@ -6,11 +6,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(value = "lagou-email-service",path = "/email")
+@FeignClient(value = "lagou-email-service")
 public interface EmailApi {
 
 
-    @GetMapping("/{email}/{code}")
+    @GetMapping("/email/{email}/{code}")
     RestApiResult validateCode(@PathVariable("email") String email,@PathVariable("code") String code);
 
 

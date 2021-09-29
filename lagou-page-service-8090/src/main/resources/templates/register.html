@@ -26,6 +26,23 @@
                 var email = $("#reg-email").val();
                 var password = $("#reg-password").val();
                 var code = $("#reg-code").val();
+
+                console.log(email)
+                if(!email){
+                    alert("请输入用户名");
+                    return
+                }
+
+                if(!password){
+                    alert("请输入密码");
+                    return
+                }
+
+                if(!code){
+                    alert("请输入验证码");
+                    return
+                }
+
                 $.ajax({
                     url: apiUrl+"/api/user/register/"+email+"/"+password+"/"+code,
                     // url: "http://localhost:9002/api/user/register/"+email+"/"+password+"/"+code,
@@ -50,6 +67,8 @@
                     error:function (data) {
                         if(data.status == 403){
                             alert("当前ip注册次数达到上限，禁止注册");
+                        }else if(data.status == 401){
+                            alert("验证码错误");
                         }
                     }
                 })
@@ -68,11 +87,26 @@
                             alert("发生错误，请稍后重试");
                         }else{
                             alert("请到邮箱查看验证码！");
+
+                            var count = 60;
+                            var countdown = setInterval(CountDown, 1000);
+                            function CountDown() {
+                                $("#getCodeBtn").attr("disabled", true);
+                                $("#getCodeBtn").val("Please wait " + count + " seconds!");
+                                if (count == 0) {
+                                    $("#getCodeBtn").val("获取验证码").removeAttr("disabled");
+                                    clearInterval(countdown);
+                                }
+                                count--;
+                            }
+
                         }
                     }
                     //dataType: "text"
                 })
             });
+
+
         });
     </script>
     <title>Hello, world!</title>
